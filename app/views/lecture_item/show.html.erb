@@ -22,15 +22,14 @@
 <div id="sh">
 
 <!--小さな端末用ロゴ-->
-<p id="logo"><a href="index.html"><%= image_tag "nagaoka.jpg" %></a></p>
+<!--p id="logo"><a href="index.html"><%= image_tag "nagaoka.jpg" %></a></p-->
 
 <!--小さな端末用メニュー-->
 <nav id="menubar-s">
 <ul>
-<li><a href="index.html">長岡先生の映像授業</a></li>
-<li><a href="about.html">長岡先生の集中講義_数学1A2B上巻</a></li>
-<li><a href="gallery.html"> 長岡先生の集中講義_数学1A2B下巻 </a></li>
-<li><a href="contact.html">長岡先生の集中講義_数学3</a></li>
+  <% @subject1s.each do | subject1 | %>
+<li><%= link_to subject1.name, subject1.link %></li>
+  <% end %>
 </ul>
 </nav>
 
@@ -56,8 +55,8 @@
 <section id="new" class="box">
 <h2 id="newinfo_hdr" class="close"><%= @lecture_item.name %></h2>
 <dt></dt>
-<%= link_to(image_tag(@lecture_item.image), @lecture_item.link) %>
-</a>
+<dl>
+<a href="<%= @lecture_item.link %>"><img src="<%=@lecture_item.image %>"/></a>
 </dl>
 </section>
 <% end %>
@@ -68,7 +67,7 @@
 <div id="sub">
 
 <!--大きな端末用（481px以上端末）ロゴ-->
-<p id="logo"><a href="index.html"><%= image_tag "nagaoka.jpg" %></a></p>
+<!--p id="logo"><a href="index.html"><%= image_tag "nagaoka.jpg" %></a></p-->
 
 <!--大きな端末用（481px以上端末）メニュー-->
 <nav id="menubar">
