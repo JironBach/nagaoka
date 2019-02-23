@@ -24,8 +24,5 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: js
-  password: tangerine3
-  host: localhost
-  port: 5433
-  database: nagaoka
+  url: <%= ENV['DATABASE_URL'] %>
+

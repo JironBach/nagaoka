@@ -23,7 +23,7 @@
 /config/email.yml
 /config/initializers/session_store.rb
 /coverage
-/db/*.db
+#/db/*.db
 #/db/schema.rb
 /files/*
 /lib/redmine/scm/adapters/mercurial/redminehelper.pyc
