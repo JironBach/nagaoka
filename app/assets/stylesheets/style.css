@@ -13,7 +13,7 @@ body {
 	font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
 	font-size: 14px;	/*文字サイズ*/
 	line-height: 2;		/*行間*/
-	background: #230603 url(/tp_simple11_wood01/images/bg.jpg) fixed;	/*背景色、背景画像の読み込み。fixedは画面をスクロールしても画像を固定させる設定。*/
+	background: #230603 url(../images/bg.jpg) fixed;	/*背景色、背景画像の読み込み。fixedは画面をスクロールしても画像を固定させる設定。*/
 	-webkit-text-size-adjust: none;
 }
 h1,h2,h3,h4,h5,p,ul,ol,li,dl,dt,dd,form,figure,form {margin: 0px;padding: 0px;font-size: 100%;}
@@ -40,7 +40,7 @@ a:hover {
 #container {
 	width: 90%;			/*ウィンドウに対しての幅。*/
 	max-width: 1400px;	/*上への追加指定。1400pxを最大幅とする。これ以上にはならないようにする設定。*/
-	margin: 50px auto 0px;	/*上(50px)、左右(auto)、下(0px)へあけるボックス外側への余白。autoは画面の中央に配置させる意味。*/
+	margin: 20px 10px 10px 10px;	/*上(50px)、左右(auto)、下(0px)へあけるボックス外側への余白。autoは画面の中央に配置させる意味。*/
 }
 
 /*メインメニュー
@@ -157,9 +157,12 @@ a:hover {
 ---------------------------------------------------------------------------*/
 #sub {
 	float: left;	/*左側に回りこみさせる設定*/
-	position: fixed;	/*スクロールしても動かさない設定。スクロールと共に通常通りに動かしたいならこの行削除。*/
+	/*position: fixed;	/*スクロールしても動かさない設定。スクロールと共に通常通りに動かしたいならこの行削除。*/
 	width: 20%;			/*幅*/
 	max-width: 308px;	/*上への追加指定。このサイズを最大限に、これ以上大きくしない。*/
+	margin-left: 1rem;
+	overflow: scroll;
+	height: 100vh;
 }
 
 /*大きな端末用ロゴ画像
@@ -194,7 +197,7 @@ a:hover {
 }
 #new dl{
 	padding-left: 15px;
-	/*height: 340px;	/*ブロックの高さ。全て表示させたいならこの行と下の１行を削除。*/
+	height: 340px;	/*ブロックの高さ。全て表示させたいならこの行と下の１行を削除。*/
 	/*overflow: auto;	/*ブロックの高さを超えるコンテンツ量になった時に自動でスクロールバーを出す*/
 }
 /*日付設定*/
