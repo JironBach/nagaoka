@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20190221110107) do
     t.string "name", null: false
     t.string "image", null: false
     t.string "link", null: false
-    t.boolean "already", default: false
   end
 
   create_table "subject1s", force: :cascade do |t|
@@ -35,6 +34,7 @@ ActiveRecord::Schema.define(version: 20190221110107) do
     t.integer "subject1_id", null: false
     t.string "name", null: false
     t.string "link", null: false
+    t.boolean "already", default: false, null: false
   end
 
 end

@@ -7,7 +7,6 @@ class CreateLectureItems < ActiveRecord::Migration[5.1]
       t.string :name, null: false
       t.string :image, null: false
       t.string :link, null: false
-      t.boolean :already, default: false
-    end
+     end
   end
 end
