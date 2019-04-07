@@ -18,24 +18,6 @@
 
 <body>
 
-<!--小さな端末用（480px以下端末）ブロック-->
-<div id="sh">
-
-<!--小さな端末用ロゴ-->
-<!--p id="logo"><a href="index.html"><%= image_tag "nagaoka.jpg" %></a></p-->
-
-<!--小さな端末用メニュー-->
-<nav id="menubar-s">
-<ul>
-  <% @subject1s.each do | subject1 | %>
-<li><%= link_to subject1.name, subject1.link %></li>
-  <% end %>
-</ul>
-</nav>
-
-</div>
-<!--/sh-->
-
 <div id="container">
 
 <div id="main">
@@ -50,17 +32,18 @@
 
 </section>
 <!--/box-->
-
-<%= link_to 'ログアウト', logout_path %>
-<% unless @lecture_item.nil? %>
-<section id="new" class="box">
-<h2 id="newinfo_hdr" class="close"><%= @lecture_item.name %></h2>
-<dt></dt>
-<dl>
-  <a href="<%= @lecture_item.link %>"><img src="<%=@lecture_item.image %>"/></a>
-</dl>
-</section>
-<% end %>
+  <% if !signed_in? %>
+    <%= form_tag({ :controller => 'index', :action => 'regist' },
+    {method: :post}) do %>
+      <%= text_field_tag(:username) %>
+      <%= submit_tag('登録 または ログイン') %>
+    <% end %>
+  <% elsif %>
+    <%= form_tag({ :controller => 'index', :action => 'sign_out!' },
+    {method: :post}) do %>
+      <%= link_to 'ログアウト', logout_path %>
+    <% end %>
+  <% end %>
 </div>
 <!--/main-->
 
@@ -78,28 +61,11 @@
 </ul>
 </nav>
 
-<aside>
-<!--h2>関連情報</h2-->
-<ul class="submenu">
-  <%= form_tag do %>
-    <% @subject2s.each do | subject2 | %>
-    <li>
-      <%= link_to subject2.name, subject2.link %>
-      <br/><%= submit_tag '既読' %>
-      <%= check_box_tag("subject2[id][]", subject2.id.to_s, ichecked = subject2.already) %>
-    <% end %>
-    </li>
-  <% end %>
-</ul>
-<br/><br/>
-</aside>
-
 </div>
 <!--/sub-->
 
 </div>
 <!--/container-->
-
 <footer>
 <small>Copyright&copy; <a href="index.html">Sample Site</a> All Rights Reserved.</small>
 <span class="pr"><a href="http://template-party.com/" target="_blank">Web Design:Template-Party</a></span>

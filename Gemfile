@@ -37,6 +37,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'bcrypt', '~> 3.1.7'
+gem 'redis-rack'
+gem 'redis-objects'
+
 gem 'seed-fu'
 
 group :development, :test do

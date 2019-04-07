@@ -41,6 +41,7 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
+    bcrypt (3.1.12)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (11.0.0)
@@ -122,6 +123,14 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    redis (4.1.0)
+    redis-objects (1.4.3)
+      redis (~> 4.0)
+    redis-rack (2.0.5)
+      rack (>= 1.5, < 3)
+      redis-store (>= 1.2, < 2)
+    redis-store (1.6.0)
+      redis (>= 2.2, < 5)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     sass (3.7.3)
@@ -176,6 +185,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
@@ -184,6 +194,8 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rails (~> 5.1.6, >= 5.1.6.1)
+  redis-objects
+  redis-rack
   sass-rails (~> 5.0)
   seed-fu
   selenium-webdriver
@@ -195,4 +207,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.6
+   1.17.3

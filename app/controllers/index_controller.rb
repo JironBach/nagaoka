@@ -1,27 +1,56 @@
 class IndexController < ApplicationController
-  def show
+  def index
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:id])
-    @subject2 = Subject2.find(0)
-    render :show
+    render :index
   end
 
-  def update
-    Subject2.all.each do | subject2 |
-      if params[:subject2].nil?
-        subject2.already = false
-      else
-        if params[:subject2][:id].include?(subject2.id.to_s)
-          subject2.already = true
-        else
-          subject2.already = false
-        end
+  def regist
+    if params[:username].blank?
+      redirect_to '/'
+      return
+    else
+      user = User.where(name: params[:username]).first
+      if user.nil?
+        user = User.new(name: params[:username])
+        user.save!
       end
-      subject2.save!
     end
+    session[:user_id] = user.id.to_s
 
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:id])
+    @subject2s = Subject2.where(index_id: params[:id])
+    @lecture_item = LectureItem.find(params[:id].to_i)
+    redirect_to '/index/0'
+  end
+
+  def login
+    if params[:username].blank?
+      redirect_to '/'
+      return
+    elsif
+      user = User.where(name: params[:username]).first
+      if user.nil?
+        redirect_to '/'
+        return
+      elsif
+        session[:user_id] = user.id.to_s
+        @subject1s = Subject1.all
+        @subject2s = Subject2.where(index_id: params[:id])
+        @lecture_item = LectureItem.find(params[:id].to_i)
+        redirect_to '/index/0'
+      end
+    end
+    user
+  end
+
+  def sign_out!
+    reset_session
+    redirect_to '/'
+  end
+
+  def show
+    @subject1s = Subject1.all
+    @subject2s = Subject2.where(index_id: params[:id])
     @lecture_item = LectureItem.find(params[:id].to_i)
     render :show
   end
@@ -29,7 +58,7 @@ class IndexController < ApplicationController
   private
 
   def submit1_params
-    params.require(:subject1_id).permit(:id)
+    params.require(:index_id).permit(:id)
   end
 
   def submit2_update_params

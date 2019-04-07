@@ -54,4 +54,10 @@ ActiveRecord::Schema.define(version: 20190301103537) do
     t.boolean "already", default: false, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", null: false
+  end
+
 end
