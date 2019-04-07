@@ -13,6 +13,7 @@ class IndexController < ApplicationController
       if user.nil?
         user = User.new(name: params[:username])
         user.save!
+        regist_alreadies(user.id)
       end
     end
     session[:user_id] = user.id.to_s
@@ -20,6 +21,7 @@ class IndexController < ApplicationController
     @subject1s = Subject1.all
     @subject2s = Subject2.where(index_id: params[:id])
     @lecture_item = LectureItem.find(params[:id].to_i)
+    @alreadies = Already.where(user_id: params[:id].to_i).all
     redirect_to '/index/0'
   end
 
