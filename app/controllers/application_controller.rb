@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     user = User.find(user_id)
     unless user.nil?
       Subject2.all.each do |subject2|
-        already = Already.new(index_id: subject2.index_id, subject2_id: subject2.id, user_id: user_id, name: subject2.name, image: LectureItem.find(subject2.index_id).image, link: subject2.link)
+        already = Already.new(subject1_id: subject2.subject1_id, subject2_id: subject2.id, user_id: user_id, name: subject2.name, image: LectureItem.find(subject2.subject1_id).image, link: subject2.link)
         already.save!
       end
     end

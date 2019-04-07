@@ -1,7 +1,7 @@
 class LectureItemController < ApplicationController
   def show
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:index_id])
+    @subject2s = Subject2.where(subject1_id: params[:subject1_id])
     @subject2 = Subject2.find(params[:id])
     @subject2.already = true
     @subject2.save!
@@ -25,7 +25,7 @@ class LectureItemController < ApplicationController
 
     logger.debug 'debug='+params.inspect
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:index_id])
+    @subject2s = Subject2.where(subject1_id: params[:subject1_id])
     @lecture_items = LectureItem.all
     render :show
   end

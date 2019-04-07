@@ -19,7 +19,7 @@ class IndexController < ApplicationController
     session[:user_id] = user.id.to_s
 
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(index_id: params[:id])
+    @subject2s = Subject2.where(subject1_id: params[:id])
     @lecture_item = LectureItem.find(params[:id].to_i)
     @alreadies = Already.where(user_id: params[:id].to_i).all
     redirect_to '/index/0'
@@ -37,7 +37,7 @@ class IndexController < ApplicationController
       elsif
         session[:user_id] = user.id.to_s
         @subject1s = Subject1.all
-        @subject2s = Subject2.where(index_id: params[:id])
+        @subject2s = Subject2.where(subject1_id: params[:id])
         @lecture_item = LectureItem.find(params[:id].to_i)
         redirect_to '/index/0'
       end
@@ -52,7 +52,7 @@ class IndexController < ApplicationController
 
   def show
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(index_id: params[:id])
+    @subject2s = Subject2.where(subject1_id: params[:id])
     @lecture_item = LectureItem.find(params[:id].to_i)
     render :show
   end
@@ -60,11 +60,11 @@ class IndexController < ApplicationController
   private
 
   def submit1_params
-    params.require(:index_id).permit(:id)
+    params.require(:subject1_id).permit(:id)
   end
 
   def submit2_update_params
-    params.require(:index_id).permit(:subject2, [:subject2][:index_id])
+    params.require(:subject1_id).permit(:subject2, [:subject2][:subject1_id])
   end
 
 end
