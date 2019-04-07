@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190221110107) do
+ActiveRecord::Schema.define(version: 20190301103537) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "alreadies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "subject2_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "already", default: false, null: false
+    t.integer "index_id", null: false
+    t.string "name", null: false
+    t.string "image", null: false
+    t.string "link", null: false
+    t.index ["subject2_id"], name: "index_alreadies_on_subject2_id"
+    t.index ["user_id"], name: "index_alreadies_on_user_id"
+  end
 
   create_table "lecture_items", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -31,7 +48,7 @@ ActiveRecord::Schema.define(version: 20190221110107) do
   create_table "subject2s", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "subject1_id", null: false
+    t.integer "index_id", null: false
     t.string "name", null: false
     t.string "link", null: false
     t.boolean "already", default: false, null: false
