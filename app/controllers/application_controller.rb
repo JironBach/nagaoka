@@ -36,4 +36,26 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def update_alreadies(alreadies, user_id)
+    if alreadies.nil?
+      Already.all.each do |already|
+        already.already = false
+        already.save!
+      end
+    elsif
+      alreadies.each do |already|
+        Subject2.all.each do |subject2|
+          tmp_already = Already.where(subject2_id: subject2.id, user_id: user_id).first
+          if tmp_already.subject2_id == already.to_i
+            tmp_already.already = true
+          elsif
+            tmp_already.already = false
+          end
+          tmp_already.save!
+        end
+      end
+    end
+  end
+
 end

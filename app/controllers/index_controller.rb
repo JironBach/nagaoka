@@ -52,9 +52,15 @@ class IndexController < ApplicationController
 
   def show
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:id])
+    @subject2s = Subject2.where(subject1_id: params[:id].to_i)
     @lecture_item = LectureItem.find(params[:id].to_i)
+    @alreadies = Already.where(subject1_id: params[:id].to_i, user_id: session[:user_id].to_i).all.order(:already, :subject2_id)
     render :show
+  end
+
+  def post
+    update_alreadies(params[:already], session[:user_id].to_i)
+    redirect_to '/index/' + params[:id]
   end
 
   private
@@ -65,6 +71,10 @@ class IndexController < ApplicationController
 
   def submit2_update_params
     params.require(:subject1_id).permit(:subject2, [:subject2][:subject1_id])
+  end
+
+  def update
+    update_alreadies(params, params[:subject2_id], session[:user_id])
   end
 
 end

@@ -51,6 +51,7 @@
 </section>
 <!--/box-->
 
+<%= link_to 'ログアウト', logout_path %>
 <% unless @lecture_item.nil? %>
 <section id="new" class="box">
 <h2 id="newinfo_hdr" class="close"><%= @lecture_item.name %></h2>
@@ -82,11 +83,11 @@
 <!--h2>関連情報</h2-->
 <ul class="submenu">
   <%= form_tag do %>
-    <% @subject2s.each do | subject2 | %>
+    <% @alreadies.each do | already | %>
     <li>
-      <%= link_to subject2.name, subject2.link %>
-      <%= submit_tag '既読' %>
-      <%= check_box_tag("subject2[id][]", subject2.id.to_s, ichecked = subject2.already) %>
+      <%= link_to already.name, Subject1.find(already.subject1_id).link + already.link %>
+      <br/><%= submit_tag '既読' %>
+      <%= check_box_tag("already[id][]", already.id.to_s, ichecked = already.already) %>
     <% end %>
     </li>
   <% end %>

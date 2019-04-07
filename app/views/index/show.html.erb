@@ -82,11 +82,11 @@
 <!--h2>関連情報</h2-->
 <ul class="submenu">
   <%= form_tag do %>
-    <% @subject2s.each do | subject2 | %>
+    <% @alreadies.each do | already | %>
     <li>
-      <%= link_to subject2.name, Subject1.find(subject2.subject1_id).link + subject2.link %>
+      <%= link_to already.name, Subject1.find(already.subject1_id).link + already.link %>
       <br/><%= submit_tag '既読' %>
-      <%= check_box_tag("subject2[id][]", subject2.id.to_s, ichecked = subject2.already) %>
+      <%= check_box_tag("already[]", already.id.to_s, checked = already.already) %>
     <% end %>
     </li>
   <% end %>

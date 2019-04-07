@@ -2,31 +2,22 @@ class LectureItemController < ApplicationController
   def show
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:subject1_id])
-    @subject2 = Subject2.find(params[:id])
-    @subject2.already = true
-    @subject2.save!
+    @subject2 = Subject2.find(params[:subject2_id].to_i)
+    already = Already.where(subject2_id: params[:id].to_i, user_id: session[:user_id].to_i).first
+    already.already = true
+    already.save!
     @lecture_item = LectureItem.find(params[:id])
+    @alreadies = Already.where(subject1_id: params[:index_id].to_i, user_id: session[:user_id].to_i).all.order(:already, :subject2_id)
     render :show
   end
 
   def update
-    Subject2.all.each do | subject2 |
-      if params[:subject2].nil?
-        subject2.already = false
-      else
-        if params[:subject2][:id].include?(subject2.id.to_s)
-          subject2.already = true
-        else
-          subject2.already = false
-        end
-      end
-      subject2.save!
-    end
+    update_alreadies(params, params[:subject2_id].to_i, session[:user_id].to_i)
 
-    logger.debug 'debug='+params.inspect
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:subject1_id])
     @lecture_items = LectureItem.all
+    @alreadies = Already.where(subject1_id: params[:index_id].to_i, user_id: session[:user_id].to_i).all.order(:already, :subject2_id)
     render :show
   end
 
