@@ -37,22 +37,28 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def update_alreadies(alreadies, user_id)
-    if alreadies.nil?
-      Already.all.each do |already|
+  def update_alreadies(alreadies, subject1_id, user_id)
+    logger.debug 'debug:already='+alreadies.inspect
+    if alreadies.count <= 1
+      Already.where(subject1_id: subject1_id, user_id: user_id).all.each do |already|
         already.already = false
         already.save!
       end
     elsif
-      alreadies.each do |already|
-        Subject2.all.each do |subject2|
+      Subject2.all.each do |subject2|
+        alreadies.each do |already|
           tmp_already = Already.where(subject2_id: subject2.id, user_id: user_id).first
-          if tmp_already.subject2_id == already.to_i
-            tmp_already.already = true
-          elsif
+          begin
+            if tmp_already.subject2_id == already.to_i - 1
+              tmp_already.already = true
+            elsif
+              tmp_already.already = false
+            end
+          rescue
+            tmp_already = Already.where(subject2_id: already - 1, user_id: user_id).first
             tmp_already.already = false
           end
-          tmp_already.save!
+          tmp_already.save! unless tmp_already.nil?
         end
       end
     end

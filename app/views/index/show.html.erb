@@ -83,12 +83,12 @@
 <ul class="submenu">
   <%= form_tag do %>
     <% @alreadies.each do | already | %>
-    <li>
-      <%= link_to already.name, Subject1.find(already.subject1_id).link + already.link %>
-      <br/><%= submit_tag '既読' %>
-      <%= check_box_tag("already[]", already.id.to_s, checked = already.already) %>
+      <li>
+        <%= link_to already.name, Subject1.find(already.subject1_id).link + already.link %>
+        <br/><%= submit_tag '既読' %>
+        <%= check_box_tag("already[]", already.id.to_s, checked = already.already) %>
+      </li>
     <% end %>
-    </li>
   <% end %>
 </ul>
 <br/><br/>

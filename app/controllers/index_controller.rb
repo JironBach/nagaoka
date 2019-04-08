@@ -54,13 +54,18 @@ class IndexController < ApplicationController
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:id].to_i)
     @lecture_item = LectureItem.find(params[:id].to_i)
-    @alreadies = Already.where(subject1_id: params[:id].to_i, user_id: session[:user_id].to_i).all.order(:already, :subject2_id)
+    @alreadies = Already.where(subject1_id: params[:id].to_i, user_id: session[:user_id].to_i).all.order(:subject2_id)
     render :show
   end
 
   def post
     update_alreadies(params[:already], session[:user_id].to_i)
-    redirect_to '/index/' + params[:id]
+
+    @subject1s = Subject1.all
+    @subject2s = Subject2.where(subject1_id: params[:subject1_id])
+    @lecture_items = LectureItem.all
+    @alreadies = Already.where(subject1_id: params[:index_id].to_i, user_id: session[:user_id].to_i).all.order(:subject2_id)
+    redirect_to "#{'/index/'+params[:subject1_id].to_s+'/subject2/'+params[:subject2_id].to_s+'/lecture_item/'+params[:id].to_s}" and return
   end
 
   private
@@ -74,7 +79,7 @@ class IndexController < ApplicationController
   end
 
   def update
-    update_alreadies(params, params[:subject2_id], session[:user_id])
+    update_alreadies(params[:already], session[:user_id].to_i)
   end
 
 end
