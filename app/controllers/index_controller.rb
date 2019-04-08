@@ -13,13 +13,15 @@ class IndexController < ApplicationController
       if user.nil?
         user = User.new(name: params[:username])
         user.save!
+        regist_alreadies(user.id)
       end
     end
     session[:user_id] = user.id.to_s
 
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(index_id: params[:id])
+    @subject2s = Subject2.where(subject1_id: params[:id])
     @lecture_item = LectureItem.find(params[:id].to_i)
+    @alreadies = Already.where(user_id: params[:id].to_i).all
     redirect_to '/index/0'
   end
 
@@ -35,7 +37,7 @@ class IndexController < ApplicationController
       elsif
         session[:user_id] = user.id.to_s
         @subject1s = Subject1.all
-        @subject2s = Subject2.where(index_id: params[:id])
+        @subject2s = Subject2.where(subject1_id: params[:id])
         @lecture_item = LectureItem.find(params[:id].to_i)
         redirect_to '/index/0'
       end
@@ -50,19 +52,34 @@ class IndexController < ApplicationController
 
   def show
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(index_id: params[:id])
+    @subject2s = Subject2.where(subject1_id: params[:id].to_i)
     @lecture_item = LectureItem.find(params[:id].to_i)
+    @alreadies = Already.where(subject1_id: params[:id].to_i, user_id: session[:user_id].to_i).all.order(:subject2_id)
     render :show
+  end
+
+  def post
+    update_alreadies(params[:already], session[:user_id].to_i)
+
+    @subject1s = Subject1.all
+    @subject2s = Subject2.where(subject1_id: params[:subject1_id])
+    @lecture_items = LectureItem.all
+    @alreadies = Already.where(subject1_id: params[:index_id].to_i, user_id: session[:user_id].to_i).all.order(:subject2_id)
+    redirect_to "#{'/index/'+params[:subject1_id].to_s+'/subject2/'+params[:subject2_id].to_s+'/lecture_item/'+params[:id].to_s}" and return
   end
 
   private
 
   def submit1_params
-    params.require(:index_id).permit(:id)
+    params.require(:subject1_id).permit(:id)
   end
 
   def submit2_update_params
-    params.require(:index_id).permit(:subject2, [:subject2][:index_id])
+    params.require(:subject1_id).permit(:subject2, [:subject2][:subject1_id])
+  end
+
+  def update
+    update_alreadies(params[:already], session[:user_id].to_i)
   end
 
 end

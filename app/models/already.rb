@@ -1,0 +1,2 @@
+class Already < ApplicationRecord
+end

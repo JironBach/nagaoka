@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190301103537) do
+ActiveRecord::Schema.define(version: 20190407134626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20190301103537) do
     t.bigint "subject2_id", null: false
     t.bigint "user_id", null: false
     t.boolean "already", default: false, null: false
-    t.integer "index_id", null: false
+    t.integer "subject1_id", null: false
     t.string "name", null: false
     t.string "image", null: false
     t.string "link", null: false
@@ -48,10 +48,13 @@ ActiveRecord::Schema.define(version: 20190301103537) do
   create_table "subject2s", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "index_id", null: false
+    t.bigint "subject1_id", null: false
     t.string "name", null: false
     t.string "link", null: false
     t.boolean "already", default: false, null: false
+    t.bigint "index_id"
+    t.index ["index_id"], name: "index_subject2s_on_index_id"
+    t.index ["subject1_id"], name: "index_subject2s_on_subject1_id"
   end
 
   create_table "users", force: :cascade do |t|

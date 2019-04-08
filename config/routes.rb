@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   post 'regist', to: 'index#regist'
   post 'login', to: 'index#login'
   get 'logout', to: 'index#sign_out!'
-  post 'index/:index_id/subject2/:subject2_id/lecture_item/:id', to: 'lecture_item#update'
+  post '/index/:id', to: 'index#post'
+  post 'index/:subject1_id/subject2/:subject2_id/lecture_item/:id', to: 'lecture_item#update'
 
   resources :index do
     resources :subject2 do
