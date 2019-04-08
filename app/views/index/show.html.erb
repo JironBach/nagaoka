@@ -71,21 +71,24 @@
 
 <!--大きな端末用（481px以上端末）メニュー-->
 <nav id="menubar">
-<ul>
-  <% @subject1s.each do | subject1 | %>
-<li><%= link_to subject1.name, subject1.link %></li>
-  <% end %>
-</ul>
+<% if signed_in? %>
+  <ul>
+    <% @subject1s.each do | subject1 | %>
+    <li><%= link_to subject1.name, subject1.link %></li>
+    <% end %>
+  </ul>
+<% end %>
 </nav>
 
 <aside>
 <!--h2>関連情報</h2-->
 <ul class="submenu">
   <%= form_tag do %>
-    <% @alreadies.each do | already | %>
+    <% @subject2s.each do | subject2 | %>
       <li>
-        <%= link_to already.name, Subject1.find(already.subject1_id).link + already.link %>
+        <%= link_to subject2.name, Subject1.find(subject2.subject1_id).link + subject2.link %>
         <br/><%= submit_tag '既読' %>
+        <% already = Already.where(subject2_id: subject2.id, user_id: session[:user_id]).first %>
         <%= check_box_tag("already[]", already.id.to_s, checked = already.already) %>
       </li>
     <% end %>

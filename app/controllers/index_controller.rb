@@ -1,10 +1,12 @@
 class IndexController < ApplicationController
   def index
+    session[:index_id] = params[:id]
     @subject1s = Subject1.all
     render :index
   end
 
   def regist
+    session[:index_id] = params[:id]
     if params[:username].blank?
       redirect_to '/'
       return
@@ -19,27 +21,30 @@ class IndexController < ApplicationController
     session[:user_id] = user.id.to_s
 
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:id])
+    @subject2s = Subject2.where(subject1_id: params[:id]).all
     @lecture_item = LectureItem.find(params[:id].to_i)
     @alreadies = Already.where(user_id: params[:id].to_i).all
-    redirect_to '/index/0'
+    redirect_to "/index/#{params[:id]}"
   end
 
   def login
+    session[:index_id] = params[:id]
     if params[:username].blank?
       redirect_to '/'
       return
     elsif
       user = User.where(name: params[:username]).first
       if user.nil?
-        redirect_to '/'
+        session[:index_id] = params[:id]
+        redirect_to "/index/#{params[:id]}"
         return
       elsif
         session[:user_id] = user.id.to_s
         @subject1s = Subject1.all
-        @subject2s = Subject2.where(subject1_id: params[:id])
+        @subject2s = Subject2.where(subject1_id: params[:id]).all
         @lecture_item = LectureItem.find(params[:id].to_i)
-        redirect_to '/index/0'
+        session[:index_id] = params[:id]
+        redirect_to "/index/#{params[:id]}"
       end
     end
     user
@@ -51,35 +56,23 @@ class IndexController < ApplicationController
   end
 
   def show
+    session[:index_id] = params[:id]
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:id].to_i)
+    @subject2s = Subject2.where(subject1_id: params[:id].to_i).all
     @lecture_item = LectureItem.find(params[:id].to_i)
-    @alreadies = Already.where(subject1_id: params[:id].to_i, user_id: session[:user_id].to_i).all.order(:subject2_id)
     render :show
   end
 
   def post
-    update_alreadies(params[:already], session[:user_id].to_i)
-
+    session[:index_id] = params[:id]
+    update_alreadies(params[:already], params[:id].to_i, session[:user_id].to_i) if signed_in?
     @subject1s = Subject1.all
-    @subject2s = Subject2.where(subject1_id: params[:subject1_id])
+    @subject2s = Subject2.where(subject1_id: params[:subject1_id]).all
     @lecture_items = LectureItem.all
-    @alreadies = Already.where(subject1_id: params[:index_id].to_i, user_id: session[:user_id].to_i).all.order(:subject2_id)
-    redirect_to "#{'/index/'+params[:subject1_id].to_s+'/subject2/'+params[:subject2_id].to_s+'/lecture_item/'+params[:id].to_s}" and return
+    session[:index_id] = params[:id]
+    redirect_to "/index/#{params[:id]}/subject2/0/lecture_item/0/"
   end
 
   private
-
-  def submit1_params
-    params.require(:subject1_id).permit(:id)
-  end
-
-  def submit2_update_params
-    params.require(:subject1_id).permit(:subject2, [:subject2][:subject1_id])
-  end
-
-  def update
-    update_alreadies(params[:already], session[:user_id].to_i)
-  end
 
 end
