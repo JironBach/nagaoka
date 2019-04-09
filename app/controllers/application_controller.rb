@@ -38,15 +38,14 @@ class ApplicationController < ActionController::Base
   end
 
   def update_alreadies(alreadies, subject1_id, user_id)
-    Subject2.all.each do |subject2|
-      if subject2.subject1_id == subject1_id
-        already = Already.where(subject2_id: subject2.id, user_id: user_id).first
-        already.already = false
-        already.save!
-      end
+    Subject2.where(subject1_id: subject1_id).all.each do |subject2|
+      already = Already.where(subject2_id: subject2.id, user_id: user_id).first
+      already.already = false
+      already.save!
     end
     return if alreadies.nil?
     alreadies.each do |already|
+      next if already.blank?
       tmp_already = Already.where(subject2_id: already.to_i - 1, user_id: user_id).first
       unless tmp_already.nil?
         tmp_already.already = true
