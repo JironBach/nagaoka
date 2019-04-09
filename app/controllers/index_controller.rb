@@ -1,5 +1,6 @@
 class IndexController < ApplicationController
   def index
+    reset_session unless signed_in?
     session[:index_id] = params[:id]
     @subject1s = Subject1.all
     render :index
