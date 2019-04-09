@@ -84,10 +84,11 @@
 <ul class="submenu">
   <%= form_tag do %>
     <%= hidden_field_tag("already[]", '') %>
-    <% @alreadies.each do | already | %>
+    <% @subject2s.each do | subject2 | %>
       <li>
-        <%= link_to already.name, Subject1.find(already.subject1_id).link + already.link %>
+        <%= link_to subject2.name, Subject1.find(subject2.subject1_id).link + subject2.link %>
         <br/><%= submit_tag '既読' %>
+        <% already = Already.where(subject2_id: subject2.id, user_id: session[:user_id]).first %>
         <%= check_box_tag("already[]", already.id.to_s, checked = already.already) %>
       </li>
     <% end %>

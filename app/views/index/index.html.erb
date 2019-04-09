@@ -54,11 +54,13 @@
 
 <!--大きな端末用（481px以上端末）メニュー-->
 <nav id="menubar">
+<% if signed_in? %>
 <ul>
   <% @subject1s.each do | subject1 | %>
 <li><%= link_to subject1.name, subject1.link %></li>
   <% end %>
 </ul>
+<% end %>
 </nav>
 
 </div>
