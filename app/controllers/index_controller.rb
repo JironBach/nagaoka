@@ -1,5 +1,6 @@
 class IndexController < ApplicationController
   def index
+    session[:tmp_update] = false
     reset_session unless signed_in?
     session[:index_id] = params[:id]
     @subject1s = Subject1.all
@@ -66,8 +67,8 @@ class IndexController < ApplicationController
 
   def post
     session[:index_id] = params[:id]
+    session[:tmp_update] = true
     update_alreadies(params[:already], params[:id].to_i, session[:user_id].to_i) if signed_in?
-    @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:subject1_id]).all
     @lecture_items = LectureItem.all
     session[:index_id] = params[:id]
