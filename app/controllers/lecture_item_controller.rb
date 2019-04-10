@@ -13,8 +13,8 @@ class LectureItemController < ApplicationController
   end
 
   def update
-    update_alreadies(params[:already], params[:index_id].to_i, session[:user_id].to_i)
     session[:tmp_update] = true
+    update_alreadies(params[:already], params[:index_id].to_i, session[:user_id].to_i)
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:index_id].to_i).all
     @lecture_items = LectureItem.all
