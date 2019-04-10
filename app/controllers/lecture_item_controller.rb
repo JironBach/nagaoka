@@ -8,6 +8,7 @@ class LectureItemController < ApplicationController
       already.already = true
       already.save!
     end
+    session[:tmp_update] = false
     @lecture_item = LectureItem.find(params[:id])
   end
 
