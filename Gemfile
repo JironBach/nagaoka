@@ -40,8 +40,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'redis-rack'
 gem 'redis-objects'
-
 gem 'seed-fu'
+gem 'travis'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

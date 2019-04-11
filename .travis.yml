@@ -1,0 +1,17 @@
+language: ruby
+    rvm: 2.6.2p47
+
+env:
+  global:
+    - RAILS_ENV=test # Travisの場合デフォルトでtest
+    - secure: "nagaokaVKVsF+w2Vowv1l/hC6p1a7BR8mwonSswcvpdbmz289dFE7oUW7gw3nwzE1lRe71Soh90YqMnGmMY6UASRWHMkDLbf4BACkt4jJKSfQyWRf+J1YmHS8l1lrhk6V+RUsQjNdGbOkuZ5PQVzpwsPzHut4UgrxuLfpW9SkIg="
+
+# featureとtryブランチ以外のブランチは実行対象に入れる
+branches:
+  except: /^(feature|try).*$/
+
+# masterとdevelopブランチのみ実行対象に入れる
+branches:
+  only:
+    - master
+    - develop
