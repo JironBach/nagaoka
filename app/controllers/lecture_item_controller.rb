@@ -1,5 +1,6 @@
 class LectureItemController < ApplicationController
   def show
+    #session[:index_id] = params[:index_id]
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:index_id]).all
     @subject2 = Subject2.find(params[:subject2_id].to_i)
@@ -13,9 +14,9 @@ class LectureItemController < ApplicationController
   end
 
   def update
-    logger.debug "debug:current_user="+current_user.inspect
     session[:tmp_update] = true
-    update_alreadies(params[:already], params[:index_id].to_i, current_user.id)
+    #session[:index_id] = params[:index_id]
+    update_alreadies(params[:already], session[:index_id].to_i, current_user.id)
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:index_id].to_i).all
     @lecture_items = LectureItem.all

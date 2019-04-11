@@ -89,7 +89,7 @@
         <%= link_to subject2.name, Subject1.find(subject2.subject1_id).link + subject2.link %>
         <br/><%= submit_tag '既読' %>
         <% already = Already.where(subject2_id: subject2.id, user_id: current_user.id).first %>
-        <%= check_box_tag("already[]", already.id.to_s, checked = already.already) %>
+        <%= check_box_tag("already[]", subject2.id.to_s, checked = already.already) %>
       </li>
     <% end %>
   <% end %>

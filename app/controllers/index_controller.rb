@@ -21,7 +21,6 @@ class IndexController < ApplicationController
       end
     end
     session[:user_id] = user.id.to_s
-
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:id]).all
     @lecture_item = LectureItem.find(params[:id].to_i)

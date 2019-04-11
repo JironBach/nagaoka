@@ -46,11 +46,12 @@ class ApplicationController < ActionController::Base
     end
     return if alreadies.nil?
     alreadies.each do |already|
-      next if already.blank?
-      tmp_already = Already.where(subject2_id: already.to_i - 1, user_id: user_id).first
-      unless tmp_already.nil?
-        tmp_already.already = true
-        tmp_already.save!
+      if !already.blank?
+        tmp_already = Already.where(subject2_id: already.to_i, user_id: user_id).first
+        unless tmp_already.nil?
+          tmp_already.already = true
+          tmp_already.save!
+        end
       end
     end
   end
