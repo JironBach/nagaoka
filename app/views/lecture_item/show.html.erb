@@ -51,6 +51,7 @@
 </section>
 <!--/box-->
 
+<h3><%= current_user.name %></h3>
 <%= link_to 'ログアウト', logout_path %>
 <% unless @lecture_item.nil? %>
 <section id="new" class="box">

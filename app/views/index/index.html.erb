@@ -39,6 +39,7 @@
       <%= submit_tag('登録 または ログイン') %>
     <% end %>
   <% elsif %>
+    <h3><%= current_user.name %></h3><br/>
     <%= form_tag({ :controller => 'index', :action => 'sign_out!' },
     {method: :post}) do %>
       <%= link_to 'ログアウト', logout_path %>
