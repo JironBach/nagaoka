@@ -1,7 +1,8 @@
 require 'redis'
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  #protect_from_forgery
+  protect_from_forgery :except => :complete
   helper_method :current_user, :signed_in?, :sign_out!
 
   def current_user
