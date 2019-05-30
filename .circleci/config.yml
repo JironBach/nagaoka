@@ -30,7 +30,7 @@ jobs:
             sudo rm /usr/local/bin/bundle
             sudo rm /usr/local/bin/bundler
             sudo gem install bundler
-            
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -52,18 +52,14 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
-      # run tests!
-      - run:
-          name: run tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
 
-            bundle exec rspec --format progress \
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
+                            --out test_results/rspec.xml \
                             --format progress \
-                            $TEST_FILES
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       # collect reports
       - store_test_results:
