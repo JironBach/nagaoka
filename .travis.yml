@@ -1,5 +1,7 @@
 language: ruby
-    rvm: 2.6.2p47
+    rvm: 2.5.5p157
+
+os: osx
 
 env:
   global:
@@ -18,3 +20,8 @@ branches:
 
 script:
   - rspec
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "6fc77401c785ce000a46aa6353d7494bbedca0c3180dd08c62d4e5179f110565b6bd76773ff6d2938080a172034560778fa050fc04e9d324b2def99a86d39138"
