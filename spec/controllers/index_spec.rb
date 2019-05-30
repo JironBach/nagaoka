@@ -58,7 +58,7 @@ describe IndexController, type: :controller do
 
     it '名前あり、名前がマッチ' do
       post :login, params:{ username: 'test' }
-      expect(response).to have_http_status(302)
+      expect(response).to have_http_status(204)
     end
   end
 
