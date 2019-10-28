@@ -12,10 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20190408193008) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "alreadies", force: :cascade do |t|
+  create_table "alreadies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "subject2_id", null: false
@@ -29,7 +26,7 @@ ActiveRecord::Schema.define(version: 20190408193008) do
     t.index ["user_id"], name: "index_alreadies_on_user_id"
   end
 
-  create_table "lecture_items", force: :cascade do |t|
+  create_table "lecture_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "subject2_id", null: false
@@ -38,14 +35,14 @@ ActiveRecord::Schema.define(version: 20190408193008) do
     t.string "link", null: false
   end
 
-  create_table "subject1s", force: :cascade do |t|
+  create_table "subject1s", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "link"
   end
 
-  create_table "subject2s", force: :cascade do |t|
+  create_table "subject2s", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "subject1_id", null: false
@@ -56,7 +53,7 @@ ActiveRecord::Schema.define(version: 20190408193008) do
     t.index ["subject1_id"], name: "index_subject2s_on_subject1_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
