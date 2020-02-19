@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  nagaoka:
+    image: 37c990bc8140
+    container_name: /junshimo2/nagaoka
+    command: /bin/bash -c "tail -f /dev/null"
+    hostname: nagaoka
+
+networks:
+    nagaoka-network:
+      external: true
+
