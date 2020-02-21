@@ -1,2 +1,3 @@
 junshimoc
+ec2-3-133-11-8.us-east-2.compute.amazonaws.com
 
