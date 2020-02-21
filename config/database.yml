@@ -1,5 +1,5 @@
 default: &default
-  adapter: mysql
+  adapter: mysql2
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
@@ -7,16 +7,16 @@ default: &default
 
 development:
   <<: *default
-  adapter: <%= ENV['MYSQL_ENGINE'] %>
+  adapter: mysql2
   host: <%= ENV['MYSQL_HOST'] %>
-  database: <%= ENV['MYSQL_NAME_'] %>
+  database: <%= ENV['MYSQL_NAME'] %>
   port: <%= ENV['MYSQL_PORT'] %>
   username: <%= ENV['MYSQL_USER'] %>
-  password: <%= ENV['MYSQL_PASSWORD %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
 
 test:
   <<: *default
-  adapter: mysql
+  adapter: mysql2
   host: localhost
   database: nagaoka_test
   port: 3307
@@ -26,8 +26,8 @@ test:
 production:
   adapter: <%= ENV['MYSQL_ENGINE'] %>
   host: <%= ENV['MYSQL_HOST'] %>
-  database: <%= ENV['MYSQL_NAME_'] %>
+  database: <%= ENV['MYSQL_NAME'] %>
   port: <%= ENV['MYSQL_PORT'] %>
   username: <%= ENV['MYSQL_USER'] %>
-  password: <%= ENV['MYSQL_PASSWORD %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
 

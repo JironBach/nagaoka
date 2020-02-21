@@ -10,9 +10,10 @@ gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
 gem 'bundler', '2.0.1'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3', group: [:test], require: false
+gem 'mysql2'
 group :development, :production do
   #gem 'pg'
-  gem 'mysql2'
+  #gem 'mysql2'
 end
 #gem 'heroku'
 
