@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source ~/work/nagaoka/localbin/env
+git config --global user.email "junshimo2@gmail.com"
+git config --global user.name "JironBach"
+
+bundle install
+
+heroku login
+heroku run rails db:create
+heroku run rails db:migrate
+heroku run rails db:seed_fu
+
+bundle exec rails server
+
