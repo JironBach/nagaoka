@@ -1,0 +1,33 @@
+default: &default
+  adapter: mysql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  adapter: <%= ENV['MYSQL_ENGINE'] %>
+  host: <%= ENV['MYSQL_HOST'] %>
+  database: <%= ENV['MYSQL_NAME_'] %>
+  port: <%= ENV['MYSQL_PORT'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD %>
+
+test:
+  <<: *default
+  adapter: mysql
+  host: localhost
+  database: nagaoka_test
+  port: 3307
+  username: root
+  password: tangerine3
+
+production:
+  adapter: <%= ENV['MYSQL_ENGINE'] %>
+  host: <%= ENV['MYSQL_HOST'] %>
+  database: <%= ENV['MYSQL_NAME_'] %>
+  port: <%= ENV['MYSQL_PORT'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD %>
+
