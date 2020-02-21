@@ -32,12 +32,12 @@ RUN update-locale LANG=ja_JP.UTF-8
 
 RUN apt-get -y install vim
 #RUN apt-get remove --purge resolvconf && apt-get -y install --reinstall resolvconf
-RUN apt-get -y install ufw
+RUN apt-get -y install ufw nmap
 
-EXPOSE 8000
-EXPOSE 8001
-EXPOSE 8002
-EXPOSE 8003
-EXPOSE 8004
-EXPOSE 8005
+EXPOSE 3000
+EXPOSE 3001
+EXPOSE 3002
+EXPOSE 3003
+EXPOSE 3004
+EXPOSE 3005
 

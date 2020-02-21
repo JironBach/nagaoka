@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/work/nagaoka/localbin/env
+source ~/nagaoka/localbin/env
 git config --global user.email "junshimo2@gmail.com"
 git config --global user.name "JironBach"
 

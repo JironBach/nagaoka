@@ -1,8 +1,8 @@
-APP_PATH = "/var/www/ruby/rss"
+APP_PATH = "/root/nagaoka"
 
 worker_processes 2
 
-working_directory "/var/www/ruby/rss"
+#working_directory "~/nagaoka/rss"
 
 listen 3000
 
