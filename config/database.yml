@@ -16,11 +16,11 @@ development:
 test:
   <<: *default
   adapter: mysql2
-  host: localhost
-  database: nagaoka_test
-  port: 3307
-  username: root
-  password: tangerine3
+  host: <%= ENV['MYSQL_HOST'] %>
+  database: <%= ENV['MYSQL_NAME'] %>
+  port: <%= ENV['MYSQL_PORT'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
 
 production:
   adapter: <%= ENV['MYSQL_ENGINE'] %>
@@ -29,4 +29,3 @@ production:
   port: <%= ENV['MYSQL_PORT'] %>
   username: <%= ENV['MYSQL_USER'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
-

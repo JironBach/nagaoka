@@ -6,9 +6,12 @@ worker_processes 2
 
 listen 3000
 
-pid APP_PATH + "/tmp/pids/unicorn.pid"
-stderr_path APP_PATH + "/log/unicorn.log"
-stdout_path APP_PATH + "/log/unicorn.log"
+#pid APP_PATH + "/tmp/pids/unicorn.pid"
+pid  "/tmp/nagaoka_unicorn.pid"
+#stderr_path APP_PATH + "/log/nagaoka_unicorn.log"
+stderr_path "/tmp/nagaoka_unicorn.log"
+#stdout_path APP_PATH + "/log/nagaoka_unicorn.log"
+stdout_path "/tmp/nagaoka_unicorn.log"
 
 
 preload_app true
