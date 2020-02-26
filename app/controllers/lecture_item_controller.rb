@@ -1,4 +1,6 @@
 class LectureItemController < ApplicationController
+  before_action :require_login
+
   def show
     #session[:index_id] = params[:index_id]
     @subject1s = Subject1.all

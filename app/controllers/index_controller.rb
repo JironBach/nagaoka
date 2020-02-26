@@ -1,4 +1,6 @@
 class IndexController < ApplicationController
+  before_action :require_login, except: [:index, :regist, :login]
+
   def index
     session[:tmp_update] = false
     reset_session unless signed_in?
@@ -51,11 +53,6 @@ class IndexController < ApplicationController
     user
   end
 
-  def sign_out!
-    reset_session
-    redirect_to '/'
-  end
-
   def show
     session[:index_id] = params[:id]
     @subject1s = Subject1.all
@@ -74,6 +71,10 @@ class IndexController < ApplicationController
     redirect_to "/index/#{params[:id]}/subject2/0/lecture_item/0/"
   end
 
-  private
+  def sign_out!
+    reset_session
+
+    render :index
+  end
 
 end
