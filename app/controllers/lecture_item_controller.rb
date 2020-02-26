@@ -12,7 +12,7 @@ class LectureItemController < ApplicationController
       already.save!
     end
     session[:tmp_update] = false
-    @lecture_item = LectureItem.find(params[:id])
+    @lecture_item = LectureItem.where(subject2_id: params[:id]).first
   end
 
   def update

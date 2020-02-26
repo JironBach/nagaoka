@@ -57,7 +57,7 @@ class IndexController < ApplicationController
     session[:index_id] = params[:id]
     @subject1s = Subject1.all
     @subject2s = Subject2.where(subject1_id: params[:id].to_i).all
-    @lecture_item = LectureItem.find(params[:id].to_i)
+    @lecture_item = LectureItem.find(Subject2.where(subject1_id: params[:id].to_i).first.id)
     render :show
   end
 
