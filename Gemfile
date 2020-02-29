@@ -17,7 +17,7 @@ end
 #gem 'heroku'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'unicorn-rails'
 gem 'unicorn'
 
