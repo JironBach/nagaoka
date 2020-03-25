@@ -1,0 +1,31 @@
+default: &default
+  adapter: mysql2
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  adapter: postgresql
+  host: localhost
+  database: test
+  port: 15432
+  username: js
+  password:
+
+test:
+  <<: *default
+  adapter: mysql2
+  host: <%= ENV['MYSQL_HOST'] %>
+  database: <%= ENV['MYSQL_NAME'] %>
+  port: <%= ENV['MYSQL_PORT'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+
+production:
+  adapter: <%= ENV['MYSQL_ENGINE'] %>
+  host: <%= ENV['MYSQL_HOST'] %>
+  database: <%= ENV['MYSQL_NAME'] %>
+  port: <%= ENV['MYSQL_PORT'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>

@@ -11,6 +11,7 @@ gem 'bundler', '2.0.1'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3', group: [:test], require: false
 gem 'mysql2'
+gem 'pg'
 group :development, :production do
   #gem 'pg'
   #gem 'mysql2'
